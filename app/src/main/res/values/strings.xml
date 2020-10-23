@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Bcar</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_clear_codes">Clear Codes</string>
+    <string name="notification_action">Tap to open OBD-Reader</string>
+    <string name="command_list">Choose a command</string>
+    <string name="service_starting">Starting OBD connection..</string>
+    <string name="service_started">OBD connection has started.</string>
+    <string name="service_stopped">OBD connection has stopped.</string>
+    <string name="notification_label">Tap to open OBD-Reader.</string>
+    <string name="title_activity_trouble_codes">Trouble Codes</string>
+    <string name="pref_upload_category_title">Data Upload</string>
+    <string name="pref_upload_category" translatable="false">upload_category</string>
+    <string name="title_activity_trips_list">TripsList</string>
+    <string name="menu_trip_list">Trips</string>
+    <string name="menu_item_trip_delete">Delete</string>
+    <string name="pref_gps_category" translatable="false">gps_category</string>
+    <string name="dialog_loading_title">Loading…</string>
+    <string name="dialog_loading_body">Loading application View, please wait…</string>
+    <string name="menu_start_live_data">Start Live Data</string>
+    <string name="menu_stop_live_data">Stop Live Data</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_get_dtc">Get DTC</string>
+    <string name="text_gps" translatable="false">GPS</string>
+    <string name="text_obd" translatable="false">OBD</string>
+    <string name="text_bluetooth" translatable="false">Bluetooth</string>
+    <string name="text_orientation_default" translatable="false">N</string>
+    <string name="text_zero" translatable="false">0</string>
+    <string name="text_consumption_default" translatable="false">0l/100km</string>
+    <string name="text_runtime_default" translatable="false">00:00:00</string>
+    <string name="title_pref_obd">OBD Preferences</string>
+    <string name="title_pref_commands">OBD Commands</string>
+    <string name="title_pref_bluetooth" translatable="false">Bluetooth</string>
+    <string name="title_pref_gps" translatable="false">GPS</string>
+    <string name="text_no_bluetooth_id">Sorry, your device doesn\'t support Bluetooth</string>
+    <string name="text_bluetooth_disabled">You have Bluetooth disabled. Please enable it (using Mock service)</string>
+    <string name="text_bluetooth_nodevice">No Bluetooth device selected</string>
+    <string name="text_bluetooth_error_connecting">Cannot connect to bluetooth device!</string>
+    <string name="text_no_orientation_sensor">Orientation sensor missing?</string>
+    <string name="text_no_gps_support">Sorry, your device doesn\'t support or has disabled GPS.</string>
+    <string name="text_save_trip_not_available">Sorry, trip will not be saved.</string>
+    <string name="text_obd_command_failure">OBD command failure!</string>
+    <string name="text_dtc_no_data">No DTC stored</string>
+    <string name="status_no_bluetooth_id">unavailable</string>
+    <string name="status_bluetooth_disabled">disabled</string>
+    <string name="status_bluetooth_ok">ready</string>
+    <string name="status_bluetooth_connecting">connecting&#8230;</string>
+    <string name="status_bluetooth_connected">connected</string>
+    <string name="status_bluetooth_error_connecting">connection failed</string>
+    <string name="status_gps_fix">fix acquired</string>
+    <string name="status_gps_no_fix">fix not acquired</string>
+    <string name="status_gps_started">started</string>
+    <string name="status_gps_stopped">stopped</string>
+    <string name="status_gps_ready">ready</string>
+    <string name="status_gps_no_support">not available</string>
+    <string name="status_gps_not_used">not used</string>
+    <string name="status_obd_ready">OK</string>
+    <string name="status_obd_data">receiving data&#8230;</string>
+    <string name="status_obd_disconnected">disconnected</string>
+    <string name="status_obd_no_support">NA</string>
+    <string name="pref_upload_title">Enable Data Upload</string>
+    <string name="pref_upload_summaryOff">Enable http data upload</string>
+    <string name="pref_upload_summaryOn">Disable http data upload</string>
+    <string name="pref_upload_url_title">Upload URL</string>
+    <string name="pref_upload_url_summary">POST URL that will accept real-time data</string>
+    <string name="pref_vehicle_id_title">Vehicle ID</string>
+    <string name="pref_vehicle_id_summary">Optional unique id of this vehicle, used with uploaded data</string>
+    <string name="pref_bluetooth_title">Enable Bluetooth</string>
+    <string name="pref_bluetooth_summaryOff">Turn on Bluetooth</string>
+    <string name="pref_bluetooth_summaryOn">Turn off Bluetooth</string>
+    <string name="pref_bluetooth_list_devices_summary">List of paired bluetooth devices.</string>
+    <string name="pref_bluetooth_list_devices_title">Bluetooth Devices</string>
+    <string name="pref_gps_category_title">Enable GPS</string>
+    <string name="pref_gps_category_summaryOff">Turn on GPS</string>
+    <string name="pref_gps_category_summaryOn">Turn off GPS</string>
+    <string name="pref_gps_update_period_title">Update Period in Seconds</string>
+    <string name="pref_gps_update_period_summary">The length of time between querying new position in seconds</string>
+    <string name="pref_gps_distance_period_title">Update Period in Meters</string>
+    <string name="pref_gps_distance_period_summary">Min Distance between location updates, in meters</string>
+    <string name="pref_obd_protocols_title">OBD Protocol</string>
+    <string name="pref_obd_protocols_summary">Select OBD Protocol to use</string>
+    <string name="pref_imperial_units_title">Imperial Units</string>
+    <string name="pref_imperial_units_summaryOff">Enable imperial units</string>
+    <string name="pref_imperial_units_summaryOn">Go back to metric units</string>
+    <string name="pref_obd_update_period_title">Update Period in Seconds</string>
+    <string name="pref_obd_update_period_summary">The length of time between querying vehicle data in seconds</string>
+    <string name="pref_max_fuel_econ_title">Maximum Fuel Economy Value</string>
+    <string name="pref_max_fuel_econ_summary">Any fuel economy values larger than this will be thrown out</string>
+    <string name="pref_volumetric_efficiency_dialog_title">Volumetric Efficiency (eg 0.85)</string>
+    <string name="pref_volumetric_efficiency_summary">Used for fuel economy on vehicles without MAF sensor</string>
+    <string name="pref_volumetric_efficiency_title">Volumetric Efficiency</string>
+    <string name="pref_engine_displacement_title">Engine Displacement (liters)</string>
+    <string name="pref_engine_displacement_summary">Used for fuel economy on vehicles without MAF sensor</string>
+    <string name="pref_reader_config_title">Reader Config Commands</string>
+    <string name="pref_reader_config_summary">Commands to configure bluetooth reader, separate with new line</string>
+    <string name="title_pref_commands_summary">Select the commands you would like to see in real-time.</string>
+    <string name="title_pref_commands_title">OBD Commands</string>
+    <string name="title_pref_full_logging"> Full logging configuration </string>
+    <string name="pref_enable_full_logging_summary"> Enables full offline logging with upload</string>
+    <string name="pref_enable_full_logging_title"> Enable full logging </string>
+    <string name="default_dirname_full_logging">OBDReaderLogs</string>
+    <string name="pref_dirname_dialogTitle">Choose the name of the directory to save the logs</string>
+    <string name="pref_dirname_title">Directory name</string>
+    <string name="pref_dirname_summary">Name of the directory where to save the files</string>
+    <string name="pref_dev_email_title">Developer Email</string>
+    <string name="pref_dev_email_summary">Logs will be emailed to this address</string>
+    <string name="text_noerrors">There were no errors found.!</string>
+    <string name="lbl_ok">Ok</string>
+    <string name="lbl_update_available">Newer version of DiscoverITECH is available</string>
+    <string name="lbl_login">Login</string>
+    <string name="txt_username">Username</string>
+    <string name="txt_url">Enter URL here</string>
+    <string name="txt_password">Password</string>
+    <string name="lbl_keep_me_logged_in">Keep me logged in</string>
+    <string name="lbl_hide_on_startup">Purpose hide on startup</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_reset_password">Reset Password?</string>
+    <string name="btn_create_account">Not account yet?</string>
+    <string name="lbl_by_pressing_cont">By using this application, you agree to the</string>
+    <string name="lbl_pravicy_policy">Pravicy Policy</string>
+    <string name="lbl_signup">Sign Up</string>
+    <string name="txt_full_name">Full Name</string>
+    <string name="txt_user_email">Email</string>
+    <string name="lbl_enter_your_email_address">Enter Your Email Address</string>
+    <string name="btn_send">Send</string>
+    <string name="lbl_thankyou">thank you!</string>
+    <string name="lbl_network_error">Internet Connectivity Error</string>
+    <string name="lbl_you_will_be_redirected">You will be redirected to the DiscoverITECH website</string>
+    <string name="lbl_what_you_want_to_do">what you want to do?</string>
+    <string name="lbl_done">Done</string>
+    <string name="lbl_upgrade">Upgrade</string> <!---Upgrade-->
+    <string name="lbl_save">Save</string>
+    <string name="lbl_signout">SignOut</string>
+    <string name="lbl_account">User Name</string>
+    <string name="lbl_connection_no_network">No internet connection!</string>
+    <string name="lbl_signout_DiscoverITECH">sign out DiscoverITECH?</string>
+    <string name="btn_no">No</string>
+    <string name="btn_yes">Yes</string>
+    <string name="lbl_about">About</string>
+    <string name="lbl_about_fragment">About DiscoverITECH</string>
+
+    <string name="lbl_uper_txt">At Discover-I-Tech we are a complete digital marketing agency offering design, development and internet marketing services to all the businesses. We build your complete presence with Website and mobile app design, CRM Integrations, email setup, Search engine optimization, and complete digital marketing services.\n\nFrom scratch to brand awareness we take care of your business’s online presence.</string>
+    <string name="lbl_lower_txt">Create and improve your marketing potential (products, services). Provide access to unique technologies, as well as the knowledge and experience to build a successful business on the Internet. Show you clear, measurable results and regular work on the development of your business on the Internet.</string>
+
+    <string name="lbl_www_discoveritech_com">https://discoveritech.org</string>
+    <string name="lbl_please_wait_while_vpn_is_connecting">Please wait while VPN is connecting</string>
+    <string name="lbl_please_disconnect_your_vpn">Please disconnect your VPN</string>
+    <string name="lbl_get_the_best_setting">get the best settings!</string>
+    <string name="lbl_remaining_days">day remaining!</string>
+    <string name="lbl_accounts_type">account type</string>
+    <string name="lbl_days">0</string>
+    <string name="lbl_expiry_date">Expiry Date:</string>
+    <string name="lb_select_protocol">Select Protocol!</string>
+    <string name="lbl_paste_the_given_url_by_DiscoverITECH">Paste The Given URL By DiscoverITECH</string>
+    <string name="lbl_comming">coming</string>
+    <string name="lbl_soon">soon!</string>
+    <string name="lbl_accept">ACCEPT</string>
+    <string name="lbl_decline">DECLINE</string>
+    <string name="lbl_please_disconnect_vpn">Please disconnect VPN</string>
+    <string name="lbl_max_fav_server">Maximum favourite servers selected</string>
+    <string name="lbl_DiscoverITECH_set_on_your_boot_time">DiscoverITECH set on your boot startup</string>
+    <string name="lbl_udp">udp</string>
+    <string name="lbl_ikev2">ikev2</string>
+    <string name="lbl_openconnect">open connect</string>
+    <string name="lbl_tcp">tcp</string>
+    <string name="txt_search">search server</string>
+    <string name="lbl_logs">logs</string>
+
+
+    <string name="rd_full_name">full name required</string>
+    <string name="rd_email">email required</string>
+    <string name="rd_user_name">username required</string>
+    <string name="rd_password">password required</string>
+    <string name="user_type">only Admin/Client is acceptable</string>
+    <string name="rd_base_url">url required</string>
+    <string name="rd_base_url_limit">You can add only five URLs</string>
+    <string name="rd_same_url">This URL is already exists</string>
+    <string name="version_set">DiscoverITECH V</string>
+    <string name="lbl_add_new_user">Add Customer</string>
+    <string name="lbl_add_new_invoice">Generate Invoice</string>
+    <string name="lbl_pending_invoice">Pending Invoices</string>
+    <string name="lbl_dashboard">Admin Panal</string>
+    <string name="txt_account_type">Account Type (Free/Basic/Advance/Premium)</string>
+    <string name="lbl_create_client">Create Client</string>
+
+    <string name="add_client_heading">Add New Client</string>
+    <string name="lbl_view_client">Manage Customers</string>
+    <string name="lbl_create_custom_order">Custom Order Resuest</string>
+    <string name="lbl_pay_invoice">Pay Invoice</string>
+    <string name="lbl_customer_level">Customer Level</string>
+    <string name="lbl_paid_history">Paid History</string>
+    <string name="lbl_select_customer">Select Customer</string>
+
+    <!-- TODO - add your ad unit Ids -->
+    <!-- AdMob ad unit IDs -->
+    <string name="admob_app_id">ca-app-pub-4241218633164941~7784263043</string>
+    <string name="banner_home_footer">ca-app-pub-4241218633164941/7293308458</string>
+    <string name="google_ad_id">ca-app-pub-4241218633164941~7784263043</string>
+    <string name="get_qoutation">Order Request</string>
+
+    <string-array name="our_services_list">
+        <item>Mobile Application Development</item>
+        <item>Web Development Services</item>
+        <item>Digital Marketing</item>
+        <item>SEO</item>
+        <item>Cyber Security</item>
+        <item>Software testing</item>
+        <item>Mobile Application Testing</item>
+        <item>Graphic Designing</item>
+        <item>Other</item>
+
+
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_card_number">1111 1111 1111 1111</string>
+    <string name="btn_continue_payment">Done</string>
+    <string name="txt_cvv">CVV</string>
+</resources>

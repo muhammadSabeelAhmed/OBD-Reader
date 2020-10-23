@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "525402312659",
+    "firebase_url": "https://android-obd-reader-b54e0.firebaseio.com",
+    "project_id": "android-obd-reader-b54e0",
+    "storage_bucket": "android-obd-reader-b54e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525402312659:android:bcde6d13a798ef1614a926",
+        "android_client_info": {
+          "package_name": "com.github.pires.obd.reader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525402312659-ft9aprsbue9bpeia5ut28sffg1rvrg4v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8EVjYF_zE80ksjkfxuGzLjuKJ5whPGyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525402312659-ft9aprsbue9bpeia5ut28sffg1rvrg4v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525402312659:android:77eb5ebd7b0c2b7914a926",
+        "android_client_info": {
+          "package_name": "com.sabeel.obdreader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525402312659-ft9aprsbue9bpeia5ut28sffg1rvrg4v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8EVjYF_zE80ksjkfxuGzLjuKJ5whPGyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525402312659-ft9aprsbue9bpeia5ut28sffg1rvrg4v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
