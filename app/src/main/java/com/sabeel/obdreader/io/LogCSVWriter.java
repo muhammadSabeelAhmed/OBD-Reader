@@ -1,5 +1,6 @@
 package com.sabeel.obdreader.io;
 
+import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
@@ -71,52 +72,56 @@ public class LogCSVWriter {
         }
     }
 
-    public void writeLineCSV(ObdReading reading) {
+    public void writeLineCSV(ObdReading reading, Context context) {
+        preferencesHandler = new PreferencesHandler(context);
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(Global.myEmail.replace("@", "AT").replace(".", "DOT"));
-
         ArrayList<String> mydata = new ArrayList<>();
-
-        //   if (isFirstLine) {
-        String oldcrl = "";
-        oldcrl = HEADER_CSV + reading.toString();
-        addLine(oldcrl);
-        isFirstLine = false;
-
-        // Add line with the columns
-        oldcrl = "";
-        for (String ccln : NAMES_COLUMNS) {
-            oldcrl += ccln + ";";
-            mydata.add(ccln);
-        }
         if (isFirstLine) {
+            mydata.clear();
+            String oldcrl = "";
+            oldcrl = HEADER_CSV + reading.toString();
+            addLine(oldcrl);
+            isFirstLine = false;
+
+            // Add line with the columns
+            oldcrl = "";
+            for (String ccln : NAMES_COLUMNS) {
+                oldcrl += ccln + ";";
+                mydata.add("" + ccln);
+            }
             addLine(oldcrl.substring(0, oldcrl.length() - 1)); // remove last ";"
 
         } else {
+            mydata.clear();
             String crl = "";
             crl = reading.getTimestamp() + ";" +
                     reading.getLatitude() + ";" +
                     reading.getLongitude() + ";" +
                     reading.getAltitude() + ";" +
                     reading.getVin() + ";";
-
-
+            mydata.add(0, "" + reading.getTimestamp());
+            mydata.add(1, "" + reading.getLatitude());
+            mydata.add(2, "" + reading.getLongitude());
+            mydata.add(3, "" + reading.getAltitude());
+            mydata.add(4, "" + reading.getVin());
             Map<String, String> read = reading.getReadings();
-
             for (String ccln : NAMES_COLUMNS_ONLY_READINGS) {
                 crl += read.get(ccln) + ";";
+                mydata.add("" + ccln);
             }
-
             addLine(crl.substring(0, crl.length() - 1));
         }
-        /////////////////
-        LiveData liveData = new LiveData("" + mydata.get(0), "" + mydata.get(1), "" + mydata.get(2), "" + mydata.get(3), "" + mydata.get(4)
+        // Uploading vehicle Data to the Firebase...........
+        LiveData liveData = new LiveData("" + preferencesHandler.getUemail(), "" + preferencesHandler.getType(), "" + preferencesHandler.getModel(), "" + preferencesHandler.getEngine()
+                , "" + preferencesHandler.getYear(), "" + mydata.get(0), "" + mydata.get(1), "" + mydata.get(2), "" + mydata.get(3), "" + preferencesHandler.getType() + " " + preferencesHandler.getModel() + " " + preferencesHandler.getYear()
                 , "" + mydata.get(5), "" + mydata.get(6), "" + mydata.get(7), "" + mydata.get(8), "" + mydata.get(9)
                 , "" + mydata.get(10), "" + mydata.get(11), "" + mydata.get(12), "" + mydata.get(13), "" + mydata.get(14)
                 , "" + mydata.get(15), "" + mydata.get(16), "" + mydata.get(17), "" + mydata.get(18), "" + mydata.get(19)
                 , "" + mydata.get(20), "" + mydata.get(21), "" + mydata.get(22), "" + mydata.get(23)
                 , "" + mydata.get(24), "" + mydata.get(25), "" + mydata.get(26), "" + mydata.get(27));
+
         DatabaseReference newRef = databaseReference.push();
         newRef.setValue(liveData);
     }

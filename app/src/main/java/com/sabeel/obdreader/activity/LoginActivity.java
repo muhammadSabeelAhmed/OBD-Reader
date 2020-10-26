@@ -20,8 +20,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.sabeel.obdreader.GeneralClasses.Global;
 import com.sabeel.obdreader.GeneralClasses.PreferencesHandler;
@@ -118,7 +121,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 } else {
                     if (Global.CheckInternetConnectivity(LoginActivity.this)) {
                         final String username = txt_username.getText().toString();
-                        String userpassword = txt_password.getText().toString();
+                        final String userpassword = txt_password.getText().toString();
                         Log.d("MyLoginCradentials", "" + username + " " + userpassword);
                         if (!username.equals("") && !userpassword.equals("")) {
                             btn_login.setClickable(false);
@@ -130,19 +133,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                                                 btn_login.setClickable(true);
                                                 Toast.makeText(LoginActivity.this, "Failed to Login", Toast.LENGTH_LONG).show();
                                                 global.mKProgressHUD.dismiss();
-                                            } else if (!username.equals("admin@admin.com")) {
-                                                preferencesHandler.setUemail(txt_username.getText().toString());
-                                                preferencesHandler.setUpwd(txt_password.getText().toString());
-                                                Global.myEmail = txt_username.getText().toString();
-                                                Toast.makeText(LoginActivity.this, "Siged in!", Toast.LENGTH_LONG).show();
-                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                startActivity(intent);
-                                                global.mKProgressHUD.dismiss();
-                                                finish();
                                             } else {
-                                                preferencesHandler.setUemail(txt_username.getText().toString());
-                                                preferencesHandler.setUpwd(txt_password.getText().toString());
-                                                Toast.makeText(LoginActivity.this, "Siged in!", Toast.LENGTH_LONG).show();
+                                                preferencesHandler.setUemail(username);
+                                                preferencesHandler.setUpwd(userpassword);
+                                                getAccountDetails();
+                                                Toast.makeText(LoginActivity.this, "Signed in!", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                 startActivity(intent);
                                                 global.mKProgressHUD.dismiss();
@@ -184,23 +179,16 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
     private void Checkloggedin() {
-
         preferencesHandler = new PreferencesHandler(LoginActivity.this);
-
         if (global.toggle_key == 0) {
-
             chk_keep_me_logged_in.setImageResource(R.drawable.check_without_makr);
             global.toggle_key = 1;
             preferencesHandler.setIsautocheck("false");
-
         } else {
-
             chk_keep_me_logged_in.setImageResource(R.drawable.check_with_mark);
             global.toggle_key = 0;
             preferencesHandler.setIsautocheck("true");
         }
-
-
     }
 
 
@@ -235,5 +223,25 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         return valid;
     }
 
+    private void getAccountDetails() {
+        databaseReference.orderByChild("uemail").equalTo(txt_user_name_txt).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot datas : dataSnapshot.getChildren()) {
+                    preferencesHandler.setUserName(datas.child("uname").getValue().toString());
+                    preferencesHandler.setUserName(datas.child("vtype").getValue().toString());
+                    preferencesHandler.setUserName(datas.child("vyear").getValue().toString());
+                    preferencesHandler.setUserName(datas.child("vmodel").getValue().toString());
+                    preferencesHandler.setUserName(datas.child("vengine").getValue().toString());
+                    global.mKProgressHUD.dismiss();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 }

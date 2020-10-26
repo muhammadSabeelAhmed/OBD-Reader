@@ -218,4 +218,12 @@
     <string name="txt_card_number">1111 1111 1111 1111</string>
     <string name="btn_continue_payment">Done</string>
     <string name="txt_cvv">CVV</string>
+    <string name="txt_type">Vehicle Type</string>
+    <string name="txt_model">Exact Model</string>
+    <string name="txt_engine">Engine</string>
+    <string name="txt_year">Year (2020)</string>
+    <string name="rd_model">Vehicle Exact Model required</string>
+    <string name="rd_engine">Vehicle Engine capacity required</string>
+    <string name="rd_year">vehicle Make Year required</string>
+    <string name="rd_type">Vehicle Type required</string>
 </resources>

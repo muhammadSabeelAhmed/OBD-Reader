@@ -9,8 +9,8 @@
         <item name="android:windowDisablePreview">true</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
-        <item name="android:navigationBarColor" tools:ignore="NewApi">@color/white</item>
-        <item name="android:statusBarColor" tools:ignore="NewApi">@color/white</item>
+        <item name="android:navigationBarColor" tools:ignore="NewApi">#E4E0DE</item>
+        <item name="android:statusBarColor" tools:ignore="NewApi">#E4E0DE</item>
     </style>
 
     <!-- Application theme. -->

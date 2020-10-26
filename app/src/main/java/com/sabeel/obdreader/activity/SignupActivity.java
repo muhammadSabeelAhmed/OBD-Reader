@@ -28,6 +28,10 @@ public class SignupActivity extends Activity implements View.OnClickListener {
 
     private TextView lbl_signup;
     private EditText txt_full_name;
+    private EditText txt_type;
+    private EditText txt_model;
+    private EditText txt_year;
+    private EditText txt_engine;
     private EditText txt_user_email;
     private EditText txt_user_password;
     private Button btn_signup;
@@ -42,6 +46,10 @@ public class SignupActivity extends Activity implements View.OnClickListener {
     private Global global;
 
     private String txt_full_name_txt = "";
+    private String txt_type_txt = "";
+    private String txt_model_txt = "";
+    private String txt_engine_txt = "";
+    private String txt_year_txt = "";
     private String txt_user_email_txt = "";
     private String txt_user_password_txt = "";
     private FirebaseDatabase database;
@@ -54,6 +62,18 @@ public class SignupActivity extends Activity implements View.OnClickListener {
 
         txt_full_name = (EditText) findViewById(R.id.txt_full_name);
         global.SetView(SignupActivity.this, txt_full_name, false);
+
+        txt_type = (EditText) findViewById(R.id.txt_type);
+        global.SetView(SignupActivity.this, txt_type, false);
+
+        txt_model = (EditText) findViewById(R.id.txt_model);
+        global.SetView(SignupActivity.this, txt_model, false);
+
+        txt_engine = (EditText) findViewById(R.id.txt_engine);
+        global.SetView(SignupActivity.this, txt_engine, false);
+
+        txt_year = (EditText) findViewById(R.id.txt_year);
+        global.SetView(SignupActivity.this, txt_year, false);
 
         txt_user_email = (EditText) findViewById(R.id.txt_user_email);
         global.SetView(SignupActivity.this, txt_user_email, false);
@@ -81,7 +101,6 @@ public class SignupActivity extends Activity implements View.OnClickListener {
         lbl_pravicy_policy = (TextView) findViewById(R.id.lbl_pravicy_policy);
         global.SetView(SignupActivity.this, lbl_pravicy_policy, false, true);
         lbl_pravicy_policy.setOnClickListener(this);
-
 
         btn_back = (ImageView) findViewById(R.id.btn_back);
         btn_back.setOnClickListener(this);
@@ -113,14 +132,18 @@ public class SignupActivity extends Activity implements View.OnClickListener {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(SignupActivity.this, "Account Created Successful", Toast.LENGTH_LONG).show();
-                                    User user = new User(txt_full_name_txt, txt_user_email_txt, txt_user_password_txt);
+                                    User user = new User("" + txt_full_name_txt, "" + txt_type_txt, "" + txt_model_txt, "" + txt_engine_txt, "" + txt_year_txt,
+                                            "" + txt_user_email_txt, "" + txt_user_password_txt);
                                     DatabaseReference newRef = databaseReference.push();
                                     newRef.setValue(user);
                                     txt_full_name.setText("");
                                     txt_user_password.setText("");
-                                    txt_full_name.setText("");
                                     txt_user_email.setText("");
-                                 //   databaseReference.setValue(user);
+                                    txt_year.setText("");
+                                    txt_model.setText("");
+                                    txt_engine.setText("");
+                                    txt_type.setText("");
+                                    //   databaseReference.setValue(user);
 
                                 } else {
                                     Toast.makeText(SignupActivity.this, "fail to create account", Toast.LENGTH_LONG).show();
@@ -215,9 +238,25 @@ public class SignupActivity extends Activity implements View.OnClickListener {
         txt_full_name_txt = txt_full_name.getText().toString();
         txt_user_email_txt = txt_user_email.getText().toString();
         txt_user_password_txt = txt_user_password.getText().toString();
+        txt_type_txt = txt_type.getText().toString();
+        txt_model_txt = txt_model.getText().toString();
+        txt_engine_txt = txt_engine.getText().toString();
+        txt_year_txt = txt_year.getText().toString();
 
         if (txt_full_name_txt.isEmpty()) {
             Toast.makeText(SignupActivity.this, R.string.rd_full_name, Toast.LENGTH_SHORT).show();
+            valid = false;
+        } else if (txt_type_txt.isEmpty() && txt_type_txt.length() < 3) {
+            Toast.makeText(SignupActivity.this, R.string.rd_type, Toast.LENGTH_SHORT).show();
+            valid = false;
+        } else if (txt_model_txt.isEmpty() && txt_model_txt.length() < 3) {
+            Toast.makeText(SignupActivity.this, R.string.rd_model, Toast.LENGTH_SHORT).show();
+            valid = false;
+        } else if (txt_engine_txt.isEmpty() && txt_engine_txt.length() < 3) {
+            Toast.makeText(SignupActivity.this, R.string.rd_engine, Toast.LENGTH_SHORT).show();
+            valid = false;
+        } else if (txt_year_txt.isEmpty() && txt_year_txt.length() < 4) {
+            Toast.makeText(SignupActivity.this, R.string.rd_year, Toast.LENGTH_SHORT).show();
             valid = false;
         } else if (txt_user_email_txt.isEmpty() || !txt_user_email_txt.matches(global.emailPattern)) {
             Toast.makeText(SignupActivity.this, R.string.rd_email, Toast.LENGTH_SHORT).show();

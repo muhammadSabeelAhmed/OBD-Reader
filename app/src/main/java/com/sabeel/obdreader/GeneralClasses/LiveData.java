@@ -1,6 +1,13 @@
 package com.sabeel.obdreader.GeneralClasses;
 
+import javax.xml.transform.sax.SAXResult;
+
 public class LiveData {
+    private String email;
+    private String type;
+    private String model;
+    private String engine;
+    private String year;
     private String time;
     private String lat;
     private String lon;
@@ -29,6 +36,42 @@ public class LiveData {
     private String trouble_codes;
     private String timing_advance;
     private String equiv_ratio;
+
+    public LiveData(String email, String type, String model, String engine, String year, String time, String lat, String lon, String alt, String v_id, String baro_pressure, String eng_cool_temp, String fuel_leve, String eng_load, String amb_air_temp, String eng_rpm, String intake_manifold_pressure, String maf, String term_fuel_trim_bank1, String fuel_eco, String long_term_fuel_trim_bank2, String fuel_type, String air_intake_temp, String fuel_pressure, String speed, String short_term_fuel_trim_bank2, String short_term_fuel_trim_bank1, String engine_runtime, String throttle_pos, String dtc_number, String trouble_codes, String timing_advance, String equiv_ratio) {
+        this.email = email;
+        this.type = type;
+        this.model = model;
+        this.engine = engine;
+        this.year = year;
+        this.time = time;
+        this.lat = lat;
+        this.lon = lon;
+        this.alt = alt;
+        this.v_id = v_id;
+        this.baro_pressure = baro_pressure;
+        this.eng_cool_temp = eng_cool_temp;
+        this.fuel_leve = fuel_leve;
+        this.eng_load = eng_load;
+        this.amb_air_temp = amb_air_temp;
+        this.eng_rpm = eng_rpm;
+        this.intake_manifold_pressure = intake_manifold_pressure;
+        this.maf = maf;
+        this.term_fuel_trim_bank1 = term_fuel_trim_bank1;
+        this.fuel_eco = fuel_eco;
+        this.long_term_fuel_trim_bank2 = long_term_fuel_trim_bank2;
+        this.fuel_type = fuel_type;
+        this.air_intake_temp = air_intake_temp;
+        this.fuel_pressure = fuel_pressure;
+        this.speed = speed;
+        this.short_term_fuel_trim_bank2 = short_term_fuel_trim_bank2;
+        this.short_term_fuel_trim_bank1 = short_term_fuel_trim_bank1;
+        this.engine_runtime = engine_runtime;
+        this.throttle_pos = throttle_pos;
+        this.dtc_number = dtc_number;
+        this.trouble_codes = trouble_codes;
+        this.timing_advance = timing_advance;
+        this.equiv_ratio = equiv_ratio;
+    }
 
     public LiveData(String time, String lat, String lon, String alt, String v_id, String baro_pressure, String eng_cool_temp, String fuel_leve, String eng_load, String amb_air_temp, String eng_rpm, String intake_manifold_pressure, String maf, String term_fuel_trim_bank1, String fuel_eco, String long_term_fuel_trim_bank2, String fuel_type, String air_intake_temp, String fuel_pressure, String speed, String short_term_fuel_trim_bank2, String short_term_fuel_trim_bank1, String engine_runtime, String throttle_pos, String dtc_number, String trouble_codes, String timing_advance, String equiv_ratio) {
         this.time = time;
@@ -85,6 +128,46 @@ public class LiveData {
         this.trouble_codes = trouble_codes;
         this.timing_advance = timing_advance;
         this.equiv_ratio = equiv_ratio;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getEngine() {
+        return engine;
+    }
+
+    public void setEngine(String engine) {
+        this.engine = engine;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public String getTime() {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -77,6 +78,166 @@
                             android:textColorHint="@color/textcolor_light_gray"
                             android:textSize="@dimen/default_text_size" />
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/edit_textfield_height_land"
+                            android:layout_marginRight="3dp"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="15dp"
+                                android:padding="1dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/type"
+                                android:tint="@color/customGrey" />
+
+                            <EditText
+                                android:id="@+id/txt_type"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="8dp"
+                                android:background="@android:color/transparent"
+                                android:ems="10"
+                                android:gravity="center|left"
+                                android:hint="@string/txt_type"
+                                android:inputType="text"
+                                android:letterSpacing="0.05"
+                                android:maxLength="40"
+                                android:singleLine="true"
+                                android:textColor="@color/textcolor_black"
+                                android:textColorHint="@color/textcolor_light_gray"
+                                android:textSize="@dimen/default_text_size" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/edit_textfield_height_land"
+                            android:layout_marginLeft="3dp"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="15dp"
+                                android:padding="2dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/model"
+                                android:tint="@color/customGrey" />
+
+                            <EditText
+                                android:id="@+id/txt_model"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="8dp"
+                                android:background="@android:color/transparent"
+                                android:ems="10"
+                                android:gravity="center|left"
+                                android:hint="@string/txt_model"
+                                android:inputType="text"
+                                android:letterSpacing="0.05"
+                                android:maxLength="40"
+                                android:singleLine="true"
+                                android:textColor="@color/textcolor_black"
+                                android:textColorHint="@color/textcolor_light_gray"
+                                android:textSize="@dimen/default_text_size" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/edit_textfield_height_land"
+                            android:layout_marginRight="3dp"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="15dp"
+                                android:padding="1dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/engine"
+                                android:tint="@color/customGrey" />
+
+                            <EditText
+                                android:id="@+id/txt_engine"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="8dp"
+                                android:background="@android:color/transparent"
+                                android:ems="10"
+                                android:gravity="center|left"
+                                android:hint="@string/txt_engine"
+                                android:inputType="text"
+                                android:letterSpacing="0.05"
+                                android:maxLength="40"
+                                android:singleLine="true"
+                                android:textColor="@color/textcolor_black"
+                                android:textColorHint="@color/textcolor_light_gray"
+                                android:textSize="@dimen/default_text_size" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/edit_textfield_height_land"
+                            android:layout_marginLeft="3dp"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="15dp"
+                                android:padding="2dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/year"
+                                android:tint="@color/customGrey" />
+
+                            <EditText
+                                android:id="@+id/txt_year"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_marginLeft="8dp"
+                                android:background="@android:color/transparent"
+                                android:ems="10"
+                                android:gravity="center|left"
+                                android:hint="@string/txt_year"
+                                android:inputType="text"
+                                android:letterSpacing="0.05"
+                                android:maxLength="40"
+                                android:singleLine="true"
+                                android:textColor="@color/textcolor_black"
+                                android:textColorHint="@color/textcolor_light_gray"
+                                android:textSize="@dimen/default_text_size" />
+
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -180,13 +341,13 @@
                         android:layout_marginTop="30dp">
 
                         <Button
-                            android:letterSpacing="0.1"
                             android:id="@+id/btn_signup"
                             android:layout_width="@dimen/button_width"
                             android:layout_height="fill_parent"
                             android:layout_centerInParent="true"
                             android:background="@drawable/button_click"
                             android:gravity="center"
+                            android:letterSpacing="0.1"
                             android:singleLine="true"
                             android:text="@string/lbl_signup"
                             android:textAllCaps="false"
@@ -285,7 +446,6 @@
     </ScrollView>
 
     <ImageView
-        android:tint="@color/textcolor_black"
         android:id="@+id/btn_back"
         android:layout_width="65dp"
         android:layout_height="65dp"
@@ -293,13 +453,15 @@
         android:layout_alignParentTop="true"
         android:padding="20dp"
         android:scaleType="centerInside"
-        android:src="@drawable/back_arrow" />
+        android:src="@drawable/back_arrow"
+        android:tint="@color/textcolor_black"  />
 
     <TextView
         android:id="@+id/versionSignup"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"

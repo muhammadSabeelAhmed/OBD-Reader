@@ -54,7 +54,7 @@ public class SplashActivity extends Activity {
                 preferencesHandler = new PreferencesHandler(SplashActivity.this);
 
                 if (preferencesHandler.getAppFirstTime().equals("true")) {
-                    preferencesHandler.setBaseurl("https://discoveritech.org/");
+                    //   preferencesHandler.setBaseurl("https://discoveritech.org/");
                     preferencesHandler.setAppFirstTime("false");
 
                     if (preferencesHandler.getIsautocheck().equals("false") && preferencesHandler.getUemail().equals("") && preferencesHandler.getUpwd().equals("")) {
@@ -117,7 +117,7 @@ public class SplashActivity extends Activity {
                 }*/
             }
 
-        }, 2000);
+        }, 3500);
     }
 
     @Override

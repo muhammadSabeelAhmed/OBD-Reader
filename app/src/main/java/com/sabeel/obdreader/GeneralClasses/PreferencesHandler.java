@@ -9,40 +9,26 @@ public class PreferencesHandler {
 
     private static SharedPreferences pref;
     private static SharedPreferences.Editor editor;
-    private static final String ACHIEVEMENTS = "noachievements";
     private static final String APP_FIRST_TIME = "app_first_time";
+
+    private static final String ISAUTOCHECK = "isautocheck";
+    public static final String DISCOUNT_OFFERED = "";
+
+    public static final String USER_NAME = "uname";
+    public static final String V_TYPE = "vtype";
+    public static final String V_MODEL = "vmodel";
+    public static final String V_ENGINE = "vengine";
+    public static final String V_YEAR = "vyear";
     private static final String UEMAIL = "uemail";
     private static final String UPWD = "upwd";
-    private static final String ISAUTOCHECK = "isautocheck";
-    private static final String CHECK_DATE = "01-01-2020";
-    private static final String CURRENT_DATE = "current_date";
-    public static final String ACCOUNT_EXPIRE = "account_expire";
-    public static final String RATE_THIS_APP_COUNT = "0";
-    public static final String RATE_THIS_APP_VALUE_SET = "3";
-    public static final String BASEURL = "baseurl";
-    public static final String ISSKIP = "isskip";
-    public static final String ISFTV = "isftv";
-    public static final String DISCOUNT_OFFERED = "";
-    public static final String USER_NAME = "";
-    public static final String USER_PASSWORD = "";
 
     public PreferencesHandler() {
 
     }
 
     public PreferencesHandler(Context context) {
-        pref = context.getSharedPreferences("obd_reader", Context.MODE_PRIVATE);
+        pref = context.getSharedPreferences("bcar_obd", Context.MODE_PRIVATE);
         editor = pref.edit();
-    }
-
-    public String getDiscountOffered() {
-        return pref.getString(DISCOUNT_OFFERED, "0");
-    }
-
-    public void setDiscountOffered(String discountOffered) {
-        editor.putString(DISCOUNT_OFFERED, discountOffered);
-        editor.apply();
-        editor.commit();
     }
 
     public String getAppFirstTime() {
@@ -65,6 +51,58 @@ public class PreferencesHandler {
         editor.commit();
     }
 
+    public String getUserName() {
+        return pref.getString(USER_NAME, "");
+    }
+
+    public void setUserName(String userName) {
+        editor.putString(USER_NAME, userName);
+        editor.apply();
+        editor.commit();
+    }
+
+
+    public String getType() {
+        return pref.getString(V_TYPE, "");
+    }
+
+    public void setType(String type) {
+        editor.putString(V_TYPE, type);
+        editor.apply();
+        editor.commit();
+    }
+
+    public String getEngine() {
+        return pref.getString(V_ENGINE, "");
+    }
+
+    public void setEngine(String engine) {
+        editor.putString(V_ENGINE, engine);
+        editor.apply();
+        editor.commit();
+    }
+
+    public String getYear() {
+        return pref.getString(V_YEAR, "");
+    }
+
+    public void setYear(String year) {
+        editor.putString(V_YEAR, year);
+        editor.apply();
+        editor.commit();
+    }
+
+    public String getModel() {
+        return pref.getString(V_MODEL, "");
+    }
+
+    public void setModel(String model) {
+        editor.putString(V_MODEL, model);
+        editor.apply();
+        editor.commit();
+    }
+
+
     public String getUpwd() {
         return pref.getString(UPWD, "");
     }
@@ -81,98 +119,6 @@ public class PreferencesHandler {
 
     public void setIsautocheck(String isautocheck) {
         editor.putString(ISAUTOCHECK, isautocheck);
-        editor.apply();
-        editor.commit();
-    }
-
-    public String getDate() {
-        return pref.getString(CHECK_DATE, "false");
-    }
-
-    public void setDate(String date) {
-        editor.putString(CHECK_DATE, date);
-        editor.apply();
-        editor.commit();
-    }
-
-    public String getRateThisAppCount() {
-        return pref.getString(RATE_THIS_APP_COUNT, "0");
-    }
-
-    public void setRateThisAppCount(String count) {
-        editor.putString(RATE_THIS_APP_COUNT, count);
-        editor.apply();
-        editor.commit();
-    }
-
-    public String getAchievements() {
-        return pref.getString(ACHIEVEMENTS, "no");
-    }
-
-    public void setAchievements(String achievements) {
-        editor.putString(ACHIEVEMENTS, achievements);
-        editor.apply();
-        editor.commit();
-    }
-
-
-    public String getRateThisAppValueSet() {
-        return pref.getString(RATE_THIS_APP_VALUE_SET, "4");
-    }
-
-    public void setRateThisAppValueSet(String value) {
-        editor.putString(RATE_THIS_APP_VALUE_SET, value);
-        editor.apply();
-        editor.commit();
-    }
-
-
-    public String getCurrentDate() {
-        return pref.getString(CURRENT_DATE, "");
-    }
-
-    public void setCurrentDate(String currentDate) {
-        editor.putString(CURRENT_DATE, currentDate);
-        editor.apply();
-        editor.commit();
-    }
-
-    public String getAccountExpire() {
-        return pref.getString(ACCOUNT_EXPIRE, "false");
-    }
-
-    public void setAccountExpire(String accountExpire) {
-        editor.putString(ACCOUNT_EXPIRE, accountExpire);
-        editor.apply();
-        editor.commit();
-    }
-
-    public String getBaseUrl() {
-        return pref.getString(BASEURL, "");
-    }
-
-    public void setBaseurl(String baseurl) {
-        editor.putString(BASEURL, baseurl);
-        editor.apply();
-        editor.commit();
-    }
-
-    public String getIsskip() {
-        return pref.getString(ISSKIP, "no");
-    }
-
-    public void setIsskip(String isskip) {
-        editor.putString(ISSKIP, isskip);
-        editor.apply();
-        editor.commit();
-    }
-
-    public String getIsftv() {
-        return pref.getString(ISFTV, "no");
-    }
-
-    public void setIsftv(String isftv) {
-        editor.putString(ISFTV, isftv);
         editor.apply();
         editor.commit();
     }

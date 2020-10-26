@@ -44,4 +44,5 @@
     <color name="custom_light_gray">#F8F8F8</color>
     <color name="custom_disable_bg_color">#aaabb3</color>
     <color name="custom_disable_txt_color">#757284</color>
+    <color name="logo_color">#5dbcd2</color>
 </resources>
