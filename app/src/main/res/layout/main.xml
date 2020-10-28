@@ -5,7 +5,12 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:padding="16dp">
+
+    <!--    <androidx.appcompat.widget.Toolbar-->
+    <!--        android:id="@+id/toolbar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="55dp" />-->
 
     <TableRow
         android:layout_width="fill_parent"

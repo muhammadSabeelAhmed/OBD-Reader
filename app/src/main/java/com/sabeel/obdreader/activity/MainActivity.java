@@ -38,6 +38,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import com.github.pires.obd.commands.ObdCommand;
@@ -326,6 +327,9 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(mToolbar);
 
         final BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
         if (btAdapter != null)
