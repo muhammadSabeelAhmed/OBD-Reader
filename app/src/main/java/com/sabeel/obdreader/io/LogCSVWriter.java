@@ -76,7 +76,7 @@ public class LogCSVWriter {
         preferencesHandler = new PreferencesHandler(context);
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(Global.myEmail.replace("@", "AT").replace(".", "DOT"));
+        databaseReference = firebaseDatabase.getReference("DataRecords");
         ArrayList<String> mydata = new ArrayList<>();
         if (isFirstLine) {
             mydata.clear();
