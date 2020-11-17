@@ -46,7 +46,6 @@ import com.github.pires.obd.commands.SpeedCommand;
 import com.github.pires.obd.commands.engine.RPMCommand;
 import com.github.pires.obd.commands.engine.RuntimeCommand;
 import com.github.pires.obd.enums.AvailableCommandNames;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.inject.Inject;
 import com.sabeel.obdreader.R;
 import com.sabeel.obdreader.config.ObdConfig;
@@ -98,7 +97,6 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
     private static final int SAVE_TRIP_NOT_AVAILABLE = 11;
     private static final int REQUEST_ENABLE_BT = 1234;
     private static boolean bluetoothDefaultIsEnable = false;
-    private FirebaseAnalytics mFirebaseAnalytics;
 
     static {
         RoboGuice.setUseAnnotationDatabases(false);
@@ -346,8 +344,6 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
         triplog = TripLog.getInstance(this.getApplicationContext());
 
         obdStatusTextView.setText(getString(R.string.status_obd_disconnected));
-
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(MainActivity.this);
 
     }
 

@@ -229,10 +229,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot datas : dataSnapshot.getChildren()) {
                     preferencesHandler.setUserName(datas.child("uname").getValue().toString());
-                    preferencesHandler.setUserName(datas.child("vtype").getValue().toString());
-                    preferencesHandler.setUserName(datas.child("vyear").getValue().toString());
-                    preferencesHandler.setUserName(datas.child("vmodel").getValue().toString());
-                    preferencesHandler.setUserName(datas.child("vengine").getValue().toString());
+                    preferencesHandler.setType(datas.child("vtype").getValue().toString());
+                    preferencesHandler.setYear(datas.child("vyear").getValue().toString());
+                    preferencesHandler.setModel(datas.child("vmodel").getValue().toString());
+                    preferencesHandler.setEngine(datas.child("vengine").getValue().toString());
+                    Log.d("MyAllData", "Name: " + preferencesHandler.getUserName() + "\nType:" + preferencesHandler.getType() + "\nYear:" + preferencesHandler.getYear() + "\nModel:" + preferencesHandler.getModel() + "\nEngine" + preferencesHandler.getEngine());
                     global.mKProgressHUD.dismiss();
                 }
             }

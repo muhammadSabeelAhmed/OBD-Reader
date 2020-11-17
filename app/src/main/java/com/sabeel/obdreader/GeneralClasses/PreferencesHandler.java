@@ -13,7 +13,6 @@ public class PreferencesHandler {
 
     private static final String ISAUTOCHECK = "isautocheck";
     public static final String DISCOUNT_OFFERED = "";
-
     public static final String USER_NAME = "uname";
     public static final String V_TYPE = "vtype";
     public static final String V_MODEL = "vmodel";

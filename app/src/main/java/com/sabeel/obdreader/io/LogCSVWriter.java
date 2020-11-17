@@ -89,7 +89,7 @@ public class LogCSVWriter {
             oldcrl = "";
             for (String ccln : NAMES_COLUMNS) {
                 oldcrl += ccln + ";";
-                mydata.add("" + ccln);
+                // mydata.add("" + ccln);
             }
             addLine(oldcrl.substring(0, oldcrl.length() - 1)); // remove last ";"
 
@@ -109,11 +109,11 @@ public class LogCSVWriter {
             Map<String, String> read = reading.getReadings();
             for (String ccln : NAMES_COLUMNS_ONLY_READINGS) {
                 crl += read.get(ccln) + ";";
-                mydata.add("" + ccln);
+               // mydata.add("" + read.get(ccln));
             }
             addLine(crl.substring(0, crl.length() - 1));
         }
-        // Uploading vehicle Data to the Firebase...........
+        //Uploading vehicle Data to the Firebase...........
         LiveData liveData = new LiveData("" + preferencesHandler.getUemail(), "" + preferencesHandler.getType(), "" + preferencesHandler.getModel(), "" + preferencesHandler.getEngine()
                 , "" + preferencesHandler.getYear(), "" + mydata.get(0), "" + mydata.get(1), "" + mydata.get(2), "" + mydata.get(3), "" + preferencesHandler.getType() + " " + preferencesHandler.getModel() + " " + preferencesHandler.getYear()
                 , "" + mydata.get(5), "" + mydata.get(6), "" + mydata.get(7), "" + mydata.get(8), "" + mydata.get(9)

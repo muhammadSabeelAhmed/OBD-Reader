@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sabeel.obdreader.GeneralClasses.Global;
+import com.sabeel.obdreader.GeneralClasses.PreferencesHandler;
 import com.sabeel.obdreader.GeneralClasses.User;
 import com.sabeel.obdreader.R;
 
@@ -136,6 +137,7 @@ public class SignupActivity extends Activity implements View.OnClickListener {
                                             "" + txt_user_email_txt, "" + txt_user_password_txt);
                                     DatabaseReference newRef = databaseReference.push();
                                     newRef.setValue(user);
+
                                     txt_full_name.setText("");
                                     txt_user_password.setText("");
                                     txt_user_email.setText("");
