@@ -344,7 +344,6 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
         triplog = TripLog.getInstance(this.getApplicationContext());
 
         obdStatusTextView.setText(getString(R.string.status_obd_disconnected));
-
     }
 
     @Override
