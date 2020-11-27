@@ -31,7 +31,7 @@ import java.io.OutputStreamWriter;
 import static android.widget.Toast.LENGTH_SHORT;
 
 public class Global {
-
+public static String filePath="";
     public static String controllerName = "";
     public static boolean isBackFunctionally = false;
     public static KProgressHUD mKProgressHUD;

@@ -1,12 +1,12 @@
 package com.sabeel.obdreader.io;
 
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
-import android.util.Log;
-
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.UUID;
+
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.util.Log;
 
 public class BluetoothManager {
 	

@@ -21,8 +21,10 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
@@ -30,15 +32,18 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 import com.github.pires.obd.commands.ObdCommand;
@@ -46,7 +51,17 @@ import com.github.pires.obd.commands.SpeedCommand;
 import com.github.pires.obd.commands.engine.RPMCommand;
 import com.github.pires.obd.commands.engine.RuntimeCommand;
 import com.github.pires.obd.enums.AvailableCommandNames;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.CancellableTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageMetadata;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.inject.Inject;
+import com.sabeel.obdreader.GeneralClasses.Global;
 import com.sabeel.obdreader.R;
 import com.sabeel.obdreader.config.ObdConfig;
 import com.sabeel.obdreader.io.AbstractGatewayService;
@@ -60,6 +75,7 @@ import com.sabeel.obdreader.net.ObdService;
 import com.sabeel.obdreader.trips.TripLog;
 import com.sabeel.obdreader.trips.TripRecord;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -79,10 +95,11 @@ import roboguice.inject.InjectView;
 import static com.sabeel.obdreader.activity.ConfigActivity.getGpsDistanceUpdatePeriod;
 import static com.sabeel.obdreader.activity.ConfigActivity.getGpsUpdatePeriod;
 
+// Some code taken from https://github.com/barbeau/gpstest
 
 @ContentView(R.layout.main)
-public class MainActivity extends RoboActivity implements ObdProgressListener, LocationListener, GpsStatus.Listener {
-
+public class MainActivity extends RoboActivity implements ObdProgressListener, LocationListener, GpsStatus.Listener, View.OnClickListener {
+    Button btn_uplaod;
     private static final String TAG = MainActivity.class.getName();
     private static final int NO_BLUETOOTH_ID = 0;
     private static final int BLUETOOTH_DISABLED = 1;
@@ -198,7 +215,7 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
                     Map<String, String> temp = new HashMap<String, String>();
                     temp.putAll(commandResult);
                     ObdReading reading = new ObdReading(lat, lon, alt, System.currentTimeMillis(), vin, temp);
-                    if (reading != null) myCSVWriter.writeLineCSV(reading, MainActivity.this);
+                    if (reading != null) myCSVWriter.writeLineCSV(reading);
                 }
                 commandResult.clear();
             }
@@ -326,9 +343,6 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(mToolbar);
-
         final BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
         if (btAdapter != null)
             bluetoothDefaultIsEnable = btAdapter.isEnabled();
@@ -344,6 +358,9 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
         triplog = TripLog.getInstance(this.getApplicationContext());
 
         obdStatusTextView.setText(getString(R.string.status_obd_disconnected));
+
+        btn_uplaod = findViewById(R.id.btn_upload);
+        btn_uplaod.setOnClickListener(this);
     }
 
     @Override
@@ -393,7 +410,8 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
         Log.d(TAG, "Resuming..");
         sensorManager.registerListener(orientListener, orientSensor,
                 SensorManager.SENSOR_DELAY_UI);
-        wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "ObdReader");
+        wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK,
+                "ObdReader");
 
         // get Bluetooth device
         final BluetoothAdapter btAdapter = BluetoothAdapter
@@ -484,6 +502,8 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
                         prefs.getString(ConfigActivity.DIRECTORY_FULL_LOGGING_KEY,
                                 getString(R.string.default_dirname_full_logging))
                 );
+
+
             } catch (FileNotFoundException | RuntimeException e) {
                 Log.e(TAG, "Can't enable logging to file.", e);
             }
@@ -683,16 +703,6 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
 
     private synchronized void gpsStart() {
         if (!mGpsIsStarted && mLocProvider != null && mLocService != null && mLocService.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
             mLocService.requestLocationUpdates(mLocProvider.getName(), getGpsUpdatePeriod(prefs), getGpsDistanceUpdatePeriod(prefs), this);
             mGpsIsStarted = true;
         } else {
@@ -705,6 +715,22 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
             mLocService.removeUpdates(this);
             mGpsIsStarted = false;
             gpsStatusTextView.setText(getString(R.string.status_gps_stopped));
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_upload:
+                String fielPath = Environment.getExternalStorageDirectory() + "/myfile.csv";
+                Log.d("FilePath", "" + fielPath);
+                    File file = new File(Global.filePath);
+                    if (file.exists()) {
+                        csvUploader(fielPath);
+                    } else {
+                        Toast.makeText(MainActivity.this, "File deleted or corrupted", Toast.LENGTH_SHORT).show();
+                    }
+                break;
         }
     }
 
@@ -735,6 +761,58 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
             Log.d(TAG, "Done");
             return null;
         }
+    }
 
+    public void csvUploader(String filePath) {
+        StorageReference mStorageReference = FirebaseStorage.getInstance().getReference();
+        Log.e("LOG", "Entering CSVUPLOADER");
+        Uri file = Uri.fromFile(new File(filePath));
+        Log.e("csvUploader Uri File:", filePath.toString());
+
+        // Create the file metadata
+        StorageMetadata metadata = new StorageMetadata.Builder().setContentType("text/csv").build();
+        Log.e("LOG", "Metadata: " + metadata.toString());
+
+        // Upload file and metadata to the path 'reports/date.csv'
+        final StorageReference uploadTask = mStorageReference.child("obdLogFiles").child("myfile.csv");
+        uploadTask.putFile(file).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+               //Task<Uri> downloadUrl = uploadTask.getDownloadUrl();  // here is Url for photo
+                Toast.makeText(MainActivity.this, "File Upload Done", Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivity.this, "File Upload Failure", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+//        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+//                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+//                //System.out.println("Upload is " + progress + "% done");
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle unsuccessful uploads
+//                Log.e("LOG", "Unsucessfull in CSVUPLOADER");
+//                Toast.makeText(MainActivity.this, "File Uploading Unsucessfull", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                // Handle successful uploads on complete
+//                Uri downloadUrl = taskSnapshot.get
+//                mainActivity.setDownloadLink(downloadUrl);
+//                Log.e("LOG", "Successfull in CSVUPLOADER");
+//                Toast.makeText(MainActivity.this, "File Uploaded Successfull", Toast.LENGTH_SHORT).show();
+//                //   mainActivity.getUrlAsync(callDate);
+//            }
+//        });
     }
 }
