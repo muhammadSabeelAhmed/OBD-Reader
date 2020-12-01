@@ -62,6 +62,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.inject.Inject;
 import com.sabeel.obdreader.GeneralClasses.Global;
+import com.sabeel.obdreader.PreferencesHandler;
 import com.sabeel.obdreader.R;
 import com.sabeel.obdreader.config.ObdConfig;
 import com.sabeel.obdreader.io.AbstractGatewayService;
@@ -114,6 +115,7 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
     private static final int SAVE_TRIP_NOT_AVAILABLE = 11;
     private static final int REQUEST_ENABLE_BT = 1234;
     private static boolean bluetoothDefaultIsEnable = false;
+    PreferencesHandler preferencesHandler;
 
     static {
         RoboGuice.setUseAnnotationDatabases(false);
@@ -361,6 +363,17 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
 
         btn_uplaod = findViewById(R.id.btn_upload);
         btn_uplaod.setOnClickListener(this);
+        preferencesHandler = new PreferencesHandler(MainActivity.this);
+//        long mils = System.currentTimeMillis();
+//        SimpleDateFormat sdf = new SimpleDateFormat("_dd_MM_yyyy_HH_mm_ss");
+//        try {
+//            myCSVWriter = new LogCSVWriter(MainActivity.this, "Log" + sdf.format(new Date(mils)).toString() + ".csv", "" + prefs.getString(ConfigActivity.DIRECTORY_FULL_LOGGING_KEY,
+//                    "" + getString(R.string.default_dirname_full_logging)));
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Log.d("MyPathIs", ""+Environment.getExternalStorageDirectory()+"/OBDReaderLogs/"+preferencesHandler.getFileName());
     }
 
     @Override
@@ -498,9 +511,8 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
             SimpleDateFormat sdf = new SimpleDateFormat("_dd_MM_yyyy_HH_mm_ss");
 
             try {
-                myCSVWriter = new LogCSVWriter("Log" + sdf.format(new Date(mils)).toString() + ".csv",
-                        prefs.getString(ConfigActivity.DIRECTORY_FULL_LOGGING_KEY,
-                                getString(R.string.default_dirname_full_logging))
+                myCSVWriter = new LogCSVWriter(MainActivity.this, "Log" + sdf.format(new Date(mils)).toString() + ".csv", "" + prefs.getString(ConfigActivity.DIRECTORY_FULL_LOGGING_KEY,
+                        "" + getString(R.string.default_dirname_full_logging))
                 );
 
 
@@ -722,14 +734,17 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_upload:
-                String fielPath = Environment.getExternalStorageDirectory() + "/myfile.csv";
-                Log.d("FilePath", "" + fielPath);
-                    File file = new File(Global.filePath);
+                String myPath = Environment.getExternalStorageDirectory()+"/OBDReaderLogs/"+preferencesHandler.getFileName();
+                if (!myPath.equals("")) {
+                    File file = new File(myPath);
                     if (file.exists()) {
-                        csvUploader(fielPath);
+                        csvUploader(myPath);
                     } else {
                         Toast.makeText(MainActivity.this, "File deleted or corrupted", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(MainActivity.this, "File not found", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -774,11 +789,11 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
         Log.e("LOG", "Metadata: " + metadata.toString());
 
         // Upload file and metadata to the path 'reports/date.csv'
-        final StorageReference uploadTask = mStorageReference.child("obdLogFiles").child("myfile.csv");
+        final StorageReference uploadTask = mStorageReference.child("obdLogFiles").child(preferencesHandler.getFileName());
         uploadTask.putFile(file).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-               //Task<Uri> downloadUrl = uploadTask.getDownloadUrl();  // here is Url for photo
+                //Task<Uri> downloadUrl = uploadTask.getDownloadUrl();  // here is Url for photo
                 Toast.makeText(MainActivity.this, "File Upload Done", Toast.LENGTH_LONG).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
