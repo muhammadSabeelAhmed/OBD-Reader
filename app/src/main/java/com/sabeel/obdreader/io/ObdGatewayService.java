@@ -24,6 +24,7 @@ import com.google.inject.Inject;
 import com.sabeel.obdreader.R;
 import com.sabeel.obdreader.activity.ConfigActivity;
 import com.sabeel.obdreader.activity.MainActivity;
+import com.sabeel.obdreader.io.ObdCommandJob.ObdCommandJobState;
 
 import java.io.File;
 import java.io.IOException;
@@ -179,13 +180,13 @@ public class ObdGatewayService extends AbstractGatewayService {
                 // log job
                 Log.d(TAG, "Taking job[" + job.getId() + "] from queue..");
 
-                if (job.getState().equals(ObdCommandJob.ObdCommandJobState.NEW)) {
+                if (job.getState().equals(ObdCommandJobState.NEW)) {
                     Log.d(TAG, "Job state is NEW. Run it..");
-                    job.setState(ObdCommandJob.ObdCommandJobState.RUNNING);
+                    job.setState(ObdCommandJobState.RUNNING);
                     if (sock.isConnected()) {
                         job.getCommand().run(sock.getInputStream(), sock.getOutputStream());
                     } else {
-                        job.setState(ObdCommandJob.ObdCommandJobState.EXECUTION_ERROR);
+                        job.setState(ObdCommandJobState.EXECUTION_ERROR);
                         Log.e(TAG, "Can't run command on a closed socket.");
                     }
                 } else
@@ -196,20 +197,20 @@ public class ObdGatewayService extends AbstractGatewayService {
                 Thread.currentThread().interrupt();
             } catch (UnsupportedCommandException u) {
                 if (job != null) {
-                    job.setState(ObdCommandJob.ObdCommandJobState.NOT_SUPPORTED);
+                    job.setState(ObdCommandJobState.NOT_SUPPORTED);
                 }
                 Log.d(TAG, "Command not supported. -> " + u.getMessage());
             } catch (IOException io) {
                 if (job != null) {
                     if(io.getMessage().contains("Broken pipe"))
-                        job.setState(ObdCommandJob.ObdCommandJobState.BROKEN_PIPE);
+                        job.setState(ObdCommandJobState.BROKEN_PIPE);
                     else
-                        job.setState(ObdCommandJob.ObdCommandJobState.EXECUTION_ERROR);
+                        job.setState(ObdCommandJobState.EXECUTION_ERROR);
                 }
                 Log.e(TAG, "IO error. -> " + io.getMessage());
             } catch (Exception e) {
                 if (job != null) {
-                    job.setState(ObdCommandJob.ObdCommandJobState.EXECUTION_ERROR);
+                    job.setState(ObdCommandJobState.EXECUTION_ERROR);
                 }
                 Log.e(TAG, "Failed to run command. -> " + e.getMessage());
             }
