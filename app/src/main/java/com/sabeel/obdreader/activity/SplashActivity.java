@@ -18,12 +18,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.sabeel.obdreader.Crashlytics;
 import com.sabeel.obdreader.GeneralClasses.Global;
 import com.sabeel.obdreader.GeneralClasses.PreferencesHandler;
 import com.sabeel.obdreader.R;
 
 public class SplashActivity extends Activity {
-
+    Crashlytics crashlytics;
     Handler handler;
     PreferencesHandler preferencesHandler;
     Global global;
@@ -46,6 +47,8 @@ public class SplashActivity extends Activity {
 //                ViewGroup.LayoutParams.WRAP_CONTENT));
 
         handler = new Handler();
+        crashlytics=new Crashlytics();
+        crashlytics.checkCrash();
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 + ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -80,7 +83,6 @@ public class SplashActivity extends Activity {
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                     } else if (preferencesHandler.getIsautocheck().equals("true") && preferencesHandler.getUemail().equals("") && preferencesHandler.getUpwd().equals("")) {
-
                         global.changeActivity(SplashActivity.this, new LoginActivity());
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
@@ -95,17 +97,12 @@ public class SplashActivity extends Activity {
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                     }
-
-
                 } else {
-
                     if (preferencesHandler.getIsautocheck().equals("false") && preferencesHandler.getUemail().equals("") && preferencesHandler.getUpwd().equals("")) {
-
                         global.changeActivity(SplashActivity.this, new LoginActivity());
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                     } else if (preferencesHandler.getIsautocheck().equals("true") && preferencesHandler.getUemail().equals("") && preferencesHandler.getUpwd().equals("")) {
-
                         global.changeActivity(SplashActivity.this, new LoginActivity());
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
